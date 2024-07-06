@@ -1,0 +1,2 @@
+class DataActivity < ApplicationRecord
+end

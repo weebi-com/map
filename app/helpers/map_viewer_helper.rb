@@ -1,0 +1,2 @@
+module MapViewerHelper
+end

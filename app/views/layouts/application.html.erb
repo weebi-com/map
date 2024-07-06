@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Viewerapp</title>
+    <title>Weebi</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <%= yield %>
+    <header class="shadow-lg">
+      <nav class="navbar navbar-expand-lg bg-body-white">
+        <div class="container py-2">
+          <a class="navbar-brand" href="#">
+            <img src="https://www.weebi.com/images/Weebi_Logo_Full.png" alt="Weebi" width="130" height="35">
+          </a>
+        </div>
+      </nav>
+    </header>
+    <div class="main-hero">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -70,3 +70,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'geocoder', '~> 1.8', '>= 1.8.3'
+gem 'solid_queue', '~> 0.3.3'
