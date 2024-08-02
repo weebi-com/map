@@ -24,7 +24,10 @@
                 <%= link_to "Admin", rails_admin_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Importer un fichier", imports_new_path, class: "nav-link" %>
+                <%= link_to "Import", new_import_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Jobs", mission_control_jobs_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to current_user.email, root_path, class: "nav-link" %>
@@ -39,7 +42,6 @@
     </nav>
     <div class="main-hero">
       <%= yield %>
-      <div data-controller="notifications"></div>
     </div>
   </body>
 </html>

@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@kalisio/leaflet.donutcluster": "^1.1.0",
     "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.19",
     "bootstrap": "^5.3.3",
