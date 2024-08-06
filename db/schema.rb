@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,36 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "data_activities", force: :cascade do |t|
-    t.string "activite_principale"
-    t.string "vente_boisson"
-    t.string "regime"
-    t.string "boite_postale"
-    t.string "telephone"
-    t.string "tel1"
-    t.string "tel2"
-    t.string "tel3"
-    t.string "forme"
-    t.string "cri"
-    t.string "centre_de_rattachement"
-    t.string "region_admin"
-    t.string "dept"
-    t.string "ville"
-    t.string "commune"
-    t.string "quartier"
-    t.string "lieux_dit"
-    t.integer "exercice"
-    t.integer "mois"
-    t.string "etatniu"
-    t.string "idclasse_activite"
-    t.string "ind"
-    t.float "lat"
-    t.float "lng"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "pays"
-  end
-
   create_table "entreprises", force: :cascade do |t|
     t.string "niu"
     t.string "forme"
@@ -110,11 +77,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "country"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.string "concurrency_key", null: false
@@ -126,7 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
   end
 
   create_table "solid_queue_claimed_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.bigint "process_id"
     t.datetime "created_at", null: false
     t.index ["job_id"], name: "index_solid_queue_claimed_executions_on_job_id", unique: true
@@ -134,7 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
   end
 
   create_table "solid_queue_failed_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.text "error"
     t.datetime "created_at", null: false
     t.index ["job_id"], name: "index_solid_queue_failed_executions_on_job_id", unique: true
@@ -177,7 +143,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
   end
 
   create_table "solid_queue_ready_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
@@ -187,7 +153,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
   end
 
   create_table "solid_queue_recurring_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.string "task_key", null: false
     t.datetime "run_at", null: false
     t.datetime "created_at", null: false
@@ -196,7 +162,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_23_101849) do
   end
 
   create_table "solid_queue_scheduled_executions", force: :cascade do |t|
-    t.bigint "job_id", null: false
+    t.integer "job_id", null: false
     t.string "queue_name", null: false
     t.integer "priority", default: 0, null: false
     t.datetime "scheduled_at", null: false
