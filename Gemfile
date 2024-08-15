@@ -42,6 +42,8 @@ gem 'rails_admin', '~> 3.1', '>= 3.1.4'
 gem 'rails_db', '~> 2.4', '>= 2.4.4'
 gem 'caxlsx', '~> 4.1'
 gem 'caxlsx_rails', '~> 0.6.4'
+gem 'solid_queue', '~> 0.5.0'
+gem 'mission_control-jobs', '~> 0.3.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

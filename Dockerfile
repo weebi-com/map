@@ -18,6 +18,7 @@ RUN apt-get update -qq && \
 
 # Set production environment
 ENV RAILS_ENV="production" \
+    RAILS_SERVE_STATIC_FILES="true" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
@@ -79,5 +80,5 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+EXPOSE 8080
+CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
