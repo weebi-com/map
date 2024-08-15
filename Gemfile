@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
+gem 'rails_admin', '~> 3.1', '>= 3.1.4'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -60,3 +61,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sassc-rails"
