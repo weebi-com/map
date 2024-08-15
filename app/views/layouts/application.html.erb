@@ -18,6 +18,7 @@
   </head>
 
   <body>
+  <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <%= link_to root_path, class: 'navbar-brand px-2' do %>
@@ -28,10 +29,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to current_user.email, root_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
     </nav>
+  </header>
+
+  <div class="container">
+    <div class="col-md-6 mx-auto">
+      <% if notice %>
+        <div class="alert alert-primary alert-dismissible fade show py-2" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-warning alert-dismissible fade show py-2" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    </div>
+  </div>
     <div class="main-hero">
       <%= yield %>
     </div>
