@@ -124,6 +124,8 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
@@ -421,6 +423,7 @@ DEPENDENCIES
   csv (~> 3.3)
   debug
   devise (~> 4.9, >= 4.9.4)
+  faker
   geocoder (~> 1.8, >= 1.8.3)
   image_processing (~> 1.2)
   jbuilder

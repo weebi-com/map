@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+User.find_or_create_by!(email: "weebi@weebi.com") do |user|
+    # Set secure password (never store passwords in plain text)
+    user.password = user.password_confirmation = "weebi@weebi.com"
+    user.save!(validate: false)
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error "Error creating user: #{e.message}"
+  end
