@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  niu: MyString
+  forme: MyString
+  raison_sociale_rgpd: MyString
+  sigle: MyString
+  activite: MyString
+  region: MyString
+  departement: MyString
+  ville: MyString
+  commune: MyString
+  quartier: MyString
+  lieux_dit: MyString
+  boite_postale: MyString
+  npc: 1
+  npc_intitule: MyString
+  isic_refined: 1
+  isic_1_dig: 1
+  isic_2_dig: 1
+  isic_3_dig: MyString
+  isic_4_dig: MyString
+  isic_intitule: MyString
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  niu: MyString
+  forme: MyString
+  raison_sociale_rgpd: MyString
+  sigle: MyString
+  activite: MyString
+  region: MyString
+  departement: MyString
+  ville: MyString
+  commune: MyString
+  quartier: MyString
+  lieux_dit: MyString
+  boite_postale: MyString
+  npc: 1
+  npc_intitule: MyString
+  isic_refined: 1
+  isic_1_dig: 1
+  isic_2_dig: 1
+  isic_3_dig: MyString
+  isic_4_dig: MyString
+  isic_intitule: MyString
+  latitude: 1.5
+  longitude: 1.5

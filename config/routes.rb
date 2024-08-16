@@ -17,4 +17,15 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout' }, only: [:sessions]
 
+  resources :imports, only: [:new, :create] do
+    collection do
+      post :categories
+    end
+  end
+  
+  namespace :api do
+    namespace :v1 do
+      resources :entreprises, only: [:index]
+    end
+  end
 end
