@@ -1,37 +1,49 @@
+![https://commons.m.wikimedia.org/wiki/File:Georeferenced_observation.png](icon.png)
 
-# Application Ruby on Rails avec PostgreSQL et Bootstrap
-
+> Boutique map
+Application Ruby on Rails avec PostgreSQL et Bootstrap
 Ce document explique les étapes nécessaires pour installer, configurer et lancer votre application Ruby on Rails.
 
 ## Prérequis
-
 - **Ruby** : v3.1.2
 - **Rails** : v7.1.3
 - **PostgreSQL** : Installation nécessaire pour la base de données
 - **Node.js** : v20.x (installation via NVM recommandée)
 - **Bootstrap** : pour la mise en forme et l'interface utilisateur
 
-## Installation
+### windows
+1. **Installer Ruby et Rails** 
+all in one : 
+- https://railsinstaller.dev/
 
-1. **Installer Ruby et Rails**  
-   Suivez les instructions sur [GoRails](https://gorails.com/setup/) pour installer Ruby et Rails.
+manually : 
+- https://www.nethad.io/2021/12/19/rails70-on-windows-without-wsl/
+
+Check whether winget is installed, if not install or update App Installer from the Microsoft Store from here
+Open PowerShell and enter: winget install OpenJS.NodeJS.LTS; winget install Yarn.Yarn; winget install Git.Git; winget install RubyInstallerTeam.RubyWithDevKit
+Close Powershell, open “Start Command Prompt with Ruby”, enter: ridk install 3
+   - ruby https://rubyinstaller.org/
+Close prompt, open a PowerShell, enter: gem install sqlite3; gem install rails --version "~> 7.0" --no-doc; 
+bundle install
+
 
 2. **Installer Node.js**  
-   Utilisez NVM pour gérer les versions de Node.js :  
-   ```bash
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-   ```
-   Puis installez Node.js v20.x :  
-   ```bash
-   nvm install 20
-   nvm use 20
-   ```
+choco install nodejs-lts --version="20.16.0"
+Utilisez NVM pour gérer les versions de Node.js :  
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+Puis installez Node.js v20.x :  
+```bash
+nvm install 20
+nvm use 20
+```
 
 3. **Installer PostgreSQL**  
-   Installez PostgreSQL selon votre système d'exploitation. Sur macOS, vous pouvez utiliser l'application [Postgres.app](https://postgresapp.com/) ou [pgAdmin](https://www.pgadmin.org/).
+Installez PostgreSQL selon votre système d'exploitation. 
 
 4. **Installer les dépendances de l'application**  
-   À la racine de votre projet, exécutez les commandes suivantes :  
+À la racine de votre projet, exécutez les commandes suivantes :  
    ```bash
    bundle install
    yarn install
@@ -43,6 +55,7 @@ Ce document explique les étapes nécessaires pour installer, configurer et lanc
    rails db:create
    rails db:migrate
    ```
+- bundle exec rails server
 
 6. **Installer Foreman**  
    Foreman permet de gérer les processus de développement. Installez-le avec les commandes suivantes :  
@@ -52,9 +65,12 @@ Ce document explique les étapes nécessaires pour installer, configurer et lanc
    ```
 
 7. **Lancer l'application**  
-   Pour lancer l'application, utilisez la commande suivante :  
+   Pour lancer l'application, utilisez la commande foreman suivante  :  
+      NB : Peut avoir besoin de ci-dessous sous windows :
+      Set-ExecutionPolicy Unrestricted
+
    ```bash
-   foreman start -f Procfile.dev
+   nf start -f Procfile.dev --env /dev/null
    ```
    Cette commande est une alternative à `rails server`, offrant une meilleure gestion des processus.
 
@@ -67,14 +83,13 @@ Ce document explique les étapes nécessaires pour installer, configurer et lanc
 
 2. Créez un utilisateur :  
    ```ruby
-   User.create(email: "weebi@weebi.com", password: "weebi@weebi.com", password_confirmation: "weebi@weebi.com")
+   User.create(email: "boutique@boutique.com", password: "boutique@boutique.com", password_confirmation: "boutique@boutique.com")
    ```
 
 3. Connectez-vous avec l'utilisateur créé à l'URL suivante :  
    [http://localhost:5000/login](http://localhost:5000/login)
 
 ## Génération des seeds
-
 Vous pouvez peupler votre base de données avec des catégories et des entreprises en exécutant les seeds. Ajoutez le code suivant à votre fichier `db/seeds.rb` :
 
 ```ruby
@@ -132,7 +147,9 @@ rails db:seed
 
 ## Documentation supplémentaire
 
-Ce README couvre les étapes essentielles pour configurer l'application. Pour plus d'informations sur des aspects spécifiques comme les tests, la configuration avancée, ou le déploiement, vous pouvez inclure des sections supplémentaires comme :
+Ce README couvre les étapes essentielles pour configurer l'application. N'hésitez pas à le personnaliser en fonction de vos besoins spécifiques. 
+Pour plus d'informations sur des aspects spécifiques comme les tests, la configuration avancée, ou le déploiement, vous pouvez inclure des sections supplémentaires comme :
+
 
 - Version de Ruby utilisée
 - Dépendances système
@@ -140,5 +157,3 @@ Ce README couvre les étapes essentielles pour configurer l'application. Pour pl
 - Instructions de déploiement
 
 ---
-
-Ce README est conçu pour vous aider à configurer et à lancer l'application rapidement. N'hésitez pas à le personnaliser en fonction de vos besoins spécifiques.

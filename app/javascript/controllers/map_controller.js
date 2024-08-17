@@ -31,17 +31,34 @@ export default class extends Controller {
       });
 
     entreprises.forEach(entreprise => {
-      var popupContent = `
+      let name = entreprise.raison_sociale_rgpd ?? '';
+      if(name != ''){
+        let lieuxDit = entreprise.lieux_dit ?? '';
+        lieuxDit = lieuxDit != '' ? lieuxDit + ' - ' : '';
+        let commune = '${entreprise.ville}/${entreprise.commune}';
+        commune = commune.replace(`${entreprise.ville}/`, '');
+        var popupContent = `
+        <b>${name}</b> 
+        <b>Addresse : ${lieuxDit}${entreprise.quartier ?? ''}</b>
+        <b>Commune : ${commune}</b>
+        <b>Département : ${departement} ${boite_postale} </b>
         <b>Activité:</b> ${entreprise.activite}<br>
-        <b>Intitulé NPC:</b> ${entreprise.npc_intitule}<br>
-        <b>ISIC Refined:</b> ${entreprise.isic_refined}<br>
-        <b>ISIC 1 Dig:</b> ${entreprise.isic_1_dig}<br>
-        <b>ISIC 2 Dig:</b> ${entreprise.isic_2_dig}<br>
-        <b>ISIC 3 Dig:</b> ${entreprise.isic_3_dig}<br>
-        <b>ISIC 4 Dig:</b> ${entreprise.isic_4_dig}<br>
-        <b>ISIC Intitulé:</b> ${entreprise.isic_intitule}
-      `;
-
+        <b>Cameroun class. :</b> ${entreprise.npc_intitule}<br>
+        <b>ILO ISIC class. :</b> ${entreprise.isic_refined} : ${entreprise.isic_intitule}
+        `;
+        } else {
+          var popupContent = `
+        <b>Activité:</b> ${entreprise.activite}<br>
+        <b>Cameroun class. :</b> ${entreprise.npc_intitule}<br>
+        <b>ILO ISIC class. :</b> ${entreprise.isic_refined} : ${entreprise.isic_intitule}
+        `;
+        }
+        // no use displaying below classes
+        // <b>ISIC 1 Dig:</b> ${entreprise.isic_1_dig}<br>
+        // <b>ISIC 2 Dig:</b> ${entreprise.isic_2_dig}<br>
+        // <b>ISIC 3 Dig:</b> ${entreprise.isic_3_dig}<br>
+        // <b>ISIC 4 Dig:</b> ${entreprise.isic_4_dig}<br>
+        
       var marker = L.marker([entreprise.latitude, entreprise.longitude]).bindPopup(popupContent);
       marker.options.isic_intitule = entreprise.isic_intitule;
       markers.addLayer(marker);
