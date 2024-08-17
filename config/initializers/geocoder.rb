@@ -2,7 +2,7 @@
 
 Geocoder.configure(
   # Geocoding options
-  http_headers: { 'User-Agent' => 'hello@weebi.com' },
+  http_headers: { 'User-Agent' => 'hello@boutique.com' },
   timeout: 5 # geocoding service timeout (secs)
   # lookup: :nominatim,         # name of geocoding service (symbol)
   # ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)

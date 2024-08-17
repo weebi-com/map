@@ -9,9 +9,9 @@
 #   end
 
 
-User.find_or_create_by!(email: "weebi@weebi.com") do |user|
+User.find_or_create_by!(email: "boutique@boutique.com") do |user|
     # Set secure password (never store passwords in plain text)
-    user.password = user.password_confirmation = "weebi@weebi.com"
+    user.password = user.password_confirmation = "boutique@boutique.com"
     user.save!(validate: false)
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error "Error creating user: #{e.message}"

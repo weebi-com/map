@@ -1,4 +1,4 @@
-
+icon https://commons.m.wikimedia.org/wiki/File:Georeferenced_observation.png
 # Application Ruby on Rails avec PostgreSQL et Bootstrap
 
 Ce document explique les étapes nécessaires pour installer, configurer et lancer votre application Ruby on Rails.
@@ -67,7 +67,7 @@ Ce document explique les étapes nécessaires pour installer, configurer et lanc
 
 2. Créez un utilisateur :  
    ```ruby
-   User.create(email: "weebi@weebi.com", password: "weebi@weebi.com", password_confirmation: "weebi@weebi.com")
+   User.create(email: "boutique@boutique.com", password: "boutique@boutique.com", password_confirmation: "boutique@boutique.com")
    ```
 
 3. Connectez-vous avec l'utilisateur créé à l'URL suivante :  
