@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.2].define(version: 2024_08_16_001743) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "adminpack"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|

@@ -3,6 +3,21 @@ import L from "leaflet"
 import "leaflet.markercluster"
 import donutCluster from "leaflet-donutcluster"
 
+var LeafIcon  = L.Icon.extend({
+  options: {
+      // shadowUrl: 'location_icon.png',
+      iconSize:     [40, 40],
+      //shadowSize:   [50, 64],
+      iconAnchor:   [40, 40],
+      //shadowAnchor: [4, 62],
+      popupAnchor:  [-19, -40]
+  }
+});
+var customIcon = new LeafIcon({iconUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/070cafa4-d3a5-4cd0-98ae-50eeb3faceaf/d6bpee1-01f2b590-df25-43ea-b70f-3b6c33880e38.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzA3MGNhZmE0LWQzYTUtNGNkMC05OGFlLTUwZWViM2ZhY2VhZlwvZDZicGVlMS0wMWYyYjU5MC1kZjI1LTQzZWEtYjcwZi0zYjZjMzM4ODBlMzgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0I2UcdVbzq8_s1nBncZAXUe-pNxjGjAeD1nGJ1XOFQA'});
+L.icon = function (options) {
+  return new L.Icon(options);
+};
+
 donutCluster(L);
 
 // Connects to data-controller="map"
@@ -31,26 +46,24 @@ export default class extends Controller {
       });
 
     entreprises.forEach(entreprise => {
-      let name = entreprise.raison_sociale_rgpd ?? '';
-      if(name != ''){
-        let lieuxDit = entreprise.lieux_dit ?? '';
-        lieuxDit = lieuxDit != '' ? lieuxDit + ' - ' : '';
-        let commune = '${entreprise.ville}/${entreprise.commune}';
-        commune = commune.replace(`${entreprise.ville}/`, '');
+      if(2+2 == 4){
+        let _lieuxDit = entreprise.lieux_dit === '' ? entreprise.lieux_dit + ' - ' : '';
+        let _commune = entreprise.commune.replace(`${entreprise.ville}`, '');
         var popupContent = `
-        <b>${name}</b> 
-        <b>Addresse : ${lieuxDit}${entreprise.quartier ?? ''}</b>
-        <b>Commune : ${commune}</b>
-        <b>Département : ${departement} ${boite_postale} </b>
-        <b>Activité:</b> ${entreprise.activite}<br>
-        <b>Cameroun class. :</b> ${entreprise.npc_intitule}<br>
-        <b>ILO ISIC class. :</b> ${entreprise.isic_refined} : ${entreprise.isic_intitule}
+        <b>Raison Sociale : </b>${entreprise.raison_sociale_rgpd === '' ? 'Protégé RGPD' : entreprise.raison_sociale_rgpd}</br>
+        <b>Forme Juridique : </b>${entreprise.forme}</br>
+        <b>Addresse : </b>${_lieuxDit} ${entreprise.quartier ?? ''}</br>
+        <b>Commune : </b>${_commune}${entreprise.ville}</br>
+        <b>Département : </b>${entreprise.departement ?? ''} ${entreprise.boite_postale} </br>
+        <b>Activité :</b> ${entreprise.activite}</br>
+        <b>Classe Cameroun : </b>${entreprise.npc} - ${entreprise.npc_intitule}</br>
+        <b>Classe ISIC (ILO): </b>${entreprise.isic_refined} - ${entreprise.isic_intitule}</br>
         `;
         } else {
           var popupContent = `
         <b>Activité:</b> ${entreprise.activite}<br>
-        <b>Cameroun class. :</b> ${entreprise.npc_intitule}<br>
-        <b>ILO ISIC class. :</b> ${entreprise.isic_refined} : ${entreprise.isic_intitule}
+        <b>Classe Cameroun : </b>${entreprise.npc} - ${entreprise.npc_intitule}<br>
+        <b>Classe ISIC (ILO): </b>${entreprise.isic_refined} - ${entreprise.isic_intitule}</br>
         `;
         }
         // no use displaying below classes
@@ -59,7 +72,7 @@ export default class extends Controller {
         // <b>ISIC 3 Dig:</b> ${entreprise.isic_3_dig}<br>
         // <b>ISIC 4 Dig:</b> ${entreprise.isic_4_dig}<br>
         
-      var marker = L.marker([entreprise.latitude, entreprise.longitude]).bindPopup(popupContent);
+      var marker = L.marker([entreprise.latitude, entreprise.longitude], {icon: customIcon}).bindPopup(popupContent);
       marker.options.isic_intitule = entreprise.isic_intitule;
       markers.addLayer(marker);
     });

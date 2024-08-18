@@ -1,46 +1,46 @@
 ![https://commons.m.wikimedia.org/wiki/File:Georeferenced_observation.png](icon.png)
 
-> Boutique map
-Application Ruby on Rails avec PostgreSQL et Bootstrap
-Ce document explique les étapes nécessaires pour installer, configurer et lancer votre application Ruby on Rails.
+# Map Cluster
 
-## Prérequis
-- **Ruby** : v3.1.2
+## Présentation
+Map permet d'importer tous types de données pour les représenter ensuite sous forme de Donut cluster
+Ce projet est pensé pour représenter des entreprises, des boutiques
+Une démo en ligne est disponible avec les boutiques du Cameroun :
+
+https://map-hl64k4kfzq-uc.a.run.app/
+
+
+- Map est une application Ruby on Rails avec PostgreSQL et Bootstrap
+
+
+# Ce document explique les étapes nécessaires pour installer, configurer et lancer votre application Ruby on Rails.
+
+## Configuration 
+### Prérequis 
+- **Ruby** : v3.1.2 or above
 - **Rails** : v7.1.3
-- **PostgreSQL** : Installation nécessaire pour la base de données
+- **PostgreSQL** : any
 - **Node.js** : v20.x (installation via NVM recommandée)
-- **Bootstrap** : pour la mise en forme et l'interface utilisateur
 
 ### windows
 1. **Installer Ruby et Rails** 
-all in one : 
-- https://railsinstaller.dev/
+- tout en un : https://railsinstaller.dev/
+- manuellement : https://www.nethad.io/2021/12/19/rails70-on-windows-without-wsl/
 
-manually : 
-- https://www.nethad.io/2021/12/19/rails70-on-windows-without-wsl/
-
-Check whether winget is installed, if not install or update App Installer from the Microsoft Store from here
-Open PowerShell and enter: winget install OpenJS.NodeJS.LTS; winget install Yarn.Yarn; winget install Git.Git; winget install RubyInstallerTeam.RubyWithDevKit
-Close Powershell, open “Start Command Prompt with Ruby”, enter: ridk install 3
-   - ruby https://rubyinstaller.org/
-Close prompt, open a PowerShell, enter: gem install sqlite3; gem install rails --version "~> 7.0" --no-doc; 
+- Check whether winget is installed, if not install or update App Installer from the Microsoft Store from here
+- Open PowerShell and enter: winget install OpenJS.NodeJS.LTS; winget install Yarn.Yarn; winget install Git.Git; winget install RubyInstallerTeam.RubyWithDevKit
+- Close Powershell, open “Start Command Prompt with Ruby”, enter: ridk install 3.3.3
+- Close prompt, open a PowerShell, enter: gem install sqlite3; gem install rails --version "~> 7.1.3" --no-doc; 
 bundle install
 
-
 2. **Installer Node.js**  
-choco install nodejs-lts --version="20.16.0"
-Utilisez NVM pour gérer les versions de Node.js :  
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
-Puis installez Node.js v20.x :  
-```bash
-nvm install 20
-nvm use 20
+choco install nodejs-lts --version="20.16.0"
 ```
 
 3. **Installer PostgreSQL**  
-Installez PostgreSQL selon votre système d'exploitation. 
+
+- https://www.postgresql.org/download/windows/
 
 4. **Installer les dépendances de l'application**  
 À la racine de votre projet, exécutez les commandes suivantes :  
@@ -50,47 +50,55 @@ Installez PostgreSQL selon votre système d'exploitation.
    ```
 
 5. **Configurer la base de données**  
-   Créez et migrez la base de données :  
+Créez et migrez la base de données :  
    ```bash
    rails db:create
    rails db:migrate
    ```
-- bundle exec rails server
-
-6. **Installer Foreman**  
-   Foreman permet de gérer les processus de développement. Installez-le avec les commandes suivantes :  
-   ```bash
-   npm install -g foreman
-   yarn global add foreman
-   ```
 
 7. **Lancer l'application**  
-   Pour lancer l'application, utilisez la commande foreman suivante  :  
-      NB : Peut avoir besoin de ci-dessous sous windows :
-      Set-ExecutionPolicy Unrestricted
+Pour lancer l'application, utilisez la commande foreman suivante  :  
+```bash
+rails server
+```
 
-   ```bash
-   nf start -f Procfile.dev --env /dev/null
-   ```
-   Cette commande est une alternative à `rails server`, offrant une meilleure gestion des processus.
+Ouvrer votre navigateur : 
+   - $host:port/login 
+   - ex : 
+      - [http://localhost:3000](http://localhost:3000)
 
-## Créer un utilisateur administrateur
 
-1. Ouvrez la console Rails :  
+- Une erreur s'affiche, mais vous y êtes presque !
+- Il reste seulement à ajouter un utilisateur 
+
+8. Créer un utilisateur administrateur
+ Ouvrez la console Rails :  
    ```bash
    rails c
    ```
-
-2. Créez un utilisateur :  
+9. Créez un utilisateur :  
    ```ruby
    User.create(email: "boutique@boutique.com", password: "boutique@boutique.com", password_confirmation: "boutique@boutique.com")
    ```
 
-3. Connectez-vous avec l'utilisateur créé à l'URL suivante :  
-   [http://localhost:5000/login](http://localhost:5000/login)
+10. Connectez-vous avec l'utilisateur créé à l'URL suivante :  
+   - $host:port/login 
+   - ex : 
+      - [http://localhost:3000/login](http://localhost:3000/login)
 
-## Génération des seeds
-Vous pouvez peupler votre base de données avec des catégories et des entreprises en exécutant les seeds. Ajoutez le code suivant à votre fichier `db/seeds.rb` :
+C'est bon vous y êtes !
+
+## Génération des données 
+
+### Le job d'import
+
+Map permet d'importer tous types de données pour les représenter ensuite sous forme de cluster map.
+La table par défaut entreprise 
+
+
+### Peupler de fausses données avec les seeds
+Vous pouvez peupler votre base de données avec des catégories et des entreprises en exécutant les seeds. 
+Ajoutez le code suivant à votre fichier `db/seeds.rb` :
 
 ```ruby
 # Seed categories
@@ -150,10 +158,22 @@ rails db:seed
 Ce README couvre les étapes essentielles pour configurer l'application. N'hésitez pas à le personnaliser en fonction de vos besoins spécifiques. 
 Pour plus d'informations sur des aspects spécifiques comme les tests, la configuration avancée, ou le déploiement, vous pouvez inclure des sections supplémentaires comme :
 
-
 - Version de Ruby utilisée
 - Dépendances système
 - Configuration spécifique
 - Instructions de déploiement
 
 ---
+
+
+
+NB : pour une meilleure gestion des processus vous pouvez utiliser foreman à la place de `rails server`
+- **Installer Foreman**  
+Foreman permet de gérer les processus de développement. Installez-le avec les commandes suivantes :  
+```bash
+npm install -g foreman
+yarn global add foreman
+```
+```bash
+nf start -f Procfile.dev --env /dev/null
+```
