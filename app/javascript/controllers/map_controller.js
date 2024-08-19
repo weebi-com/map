@@ -22,6 +22,13 @@ export default class extends Controller {
     }).addTo(this.map);
   }
 
+  
+  getCategorieDescriptionByCode(code, categories) {
+    const categorie = categories.find((category) => category.code == code);
+
+    return categorie.description || "-"
+  }
+
   addMarkersToMap(entreprises, categories, colors) {
     let markers = new L.DonutCluster(
       { chunkedLoading: true },
@@ -34,11 +41,11 @@ export default class extends Controller {
       var popupContent = `
         <b>Activité:</b> ${entreprise.activite}<br>
         <b>Intitulé NPC:</b> ${entreprise.npc_intitule}<br>
-        <b>ISIC Refined:</b> ${entreprise.isic_refined}<br>
-        <b>ISIC 1 Dig:</b> ${entreprise.isic_1_dig}<br>
-        <b>ISIC 2 Dig:</b> ${entreprise.isic_2_dig}<br>
-        <b>ISIC 3 Dig:</b> ${entreprise.isic_3_dig}<br>
-        <b>ISIC 4 Dig:</b> ${entreprise.isic_4_dig}<br>
+        <b>ISIC Refined:</b> ${this.getCategorieDescriptionByCode(entreprise.isic_refined, categories)}<br>
+        <b>ISIC 1 Dig:</b> ${this.getCategorieDescriptionByCode(entreprise.isic_1_dig, categories)}<br>
+        <b>ISIC 2 Dig:</b> ${this.getCategorieDescriptionByCode(entreprise.isic_2_dig, categories)}<br>
+        <b>ISIC 3 Dig:</b> ${this.getCategorieDescriptionByCode(entreprise.isic_3_dig, categories)}<br>
+        <b>ISIC 4 Dig:</b> ${this.getCategorieDescriptionByCode(entreprise.isic_4_dig, categories)}<br>
         <b>ISIC Intitulé:</b> ${entreprise.isic_intitule}
       `;
 
