@@ -6,6 +6,8 @@
 @import 'leaflet.markercluster/dist/MarkerCluster';
 @import 'leaflet.markercluster/dist/MarkerCluster.Default';
 
+// @import 'leaflet-draw/dist/leaflet.draw';
+
 html, body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -16,3 +18,4 @@ html, body {
     background-color: #f6faf6 !important;
     min-height: calc(100vh - 73.5px);
 }
+  

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_16_001743) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_20_152535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,13 +42,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_16_001743) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "code"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "entreprises", force: :cascade do |t|
     t.string "niu"
     t.string "forme"
@@ -74,6 +67,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_16_001743) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "isic_1_dig_description"
+    t.string "isic_2_dig_description"
+    t.string "isic_3_dig_description"
+    t.string "isic_4_dig_description"
+    t.string "isic_refined_intitule"
   end
 
   create_table "import_files", force: :cascade do |t|

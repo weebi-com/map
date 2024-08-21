@@ -1,14 +1,25 @@
 class Api::V1::EntreprisesController < ApplicationController
   def index
-    entreprises = Entreprise.with_coordinates
+    codes = [14, 46, 47, 56]
 
-    categories = Category.all
+    entreprises = Entreprise
+      .where("CHAR_LENGTH(isic_2_dig::text) = ?", 2)
+      .where.not(latitude: nil, longitude: nil)
+      .where(isic_2_dig: codes)
+
+    categories = Entreprise
+      .select("isic_2_dig, isic_2_dig_description")
+      .where("CHAR_LENGTH(isic_2_dig::text) = ?", 2)
+      .where.not(latitude: nil, longitude: nil)
+      .where(isic_2_dig: codes)
+      .group("isic_2_dig, isic_2_dig_description")
+      
     colors = generate_category_colors(categories)
 
     render json: {
-      entreprises:,
-      categories:,
-      colors:
+      entreprises: entreprises,
+      categories: categories,
+      colors: colors
     }
   end
 
@@ -17,10 +28,12 @@ class Api::V1::EntreprisesController < ApplicationController
   def generate_category_colors(categories)
     predefined_colors = {}
     color_names = %w[red blue green yellow orange purple pink brown black white]
-    extended_color_names = generate_extended_colors(color_names, categories.count)
+    count = categories.length
+
+    extended_color_names = generate_extended_colors(color_names, count)
 
     categories.each_with_index do |category, index|
-      predefined_colors[category.description] = extended_color_names[index]
+      predefined_colors[category.isic_2_dig_description] = extended_color_names[index]
     end
 
     predefined_colors
