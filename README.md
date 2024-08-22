@@ -67,19 +67,18 @@ Ouvrer votre navigateur :
    - ex : 
       - [http://localhost:3000](http://localhost:3000)
 
-
 - Une erreur s'affiche, mais vous y êtes presque !
 - Il reste seulement à ajouter un utilisateur 
 
 8. Créer un utilisateur administrateur
  Ouvrez la console Rails :  
-   ```bash
-   rails c
-   ```
+```bash
+rails c
+```
 9. Créez un utilisateur :  
-   ```ruby
-   User.create(email: "boutique@boutique.com", password: "boutique@boutique.com", password_confirmation: "boutique@boutique.com")
-   ```
+```ruby
+User.create(email: "boutique@boutique.com", password: "boutique@boutique.com", password_confirmation: "boutique@boutique.com")
+```
 
 10. Connectez-vous avec l'utilisateur créé à l'URL suivante :  
    - $host:port/login 
