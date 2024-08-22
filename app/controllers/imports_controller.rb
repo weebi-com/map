@@ -11,11 +11,6 @@ class ImportsController < ApplicationController
     handle_file_upload(@import_file, ImportEntrepriseDataJob)
   end
 
-  def categories
-    @import_file = ImportFile.new
-    handle_file_upload(@import_file, ImportCategorieDataJob)
-  end
-
   private
 
   def handle_file_upload(import_file, job)
