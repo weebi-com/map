@@ -33,6 +33,17 @@ https://map-hl64k4kfzq-uc.a.run.app/
 - Close prompt, open a PowerShell, enter: gem install sqlite3; gem install rails --version "~> 7.1.3" --no-doc; 
 bundle install
 
+
+créer un fichier .env avec
+RACK_ENV=development
+PORT=3000
+SECRET_KEY_BASE=bb
+
+créer un fichier .bashrc avec
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+
 2. **Installer Node.js**  
 ```
 choco install nodejs-lts --version="20.16.0"
