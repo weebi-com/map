@@ -32,5 +32,5 @@ plugin :tmp_restart
 # Only use a pidfile when requested
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
 
-plugin :solid_queue
-solid_queue_mode :async
+# plugin :solid_queue
+# solid_queue_mode :async

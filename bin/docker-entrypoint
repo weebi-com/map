@@ -10,6 +10,8 @@ if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   ./bin/rails db:prepare
 
   ./bin/rails db:seed
+
+  ./bin/rails solid_queue:start
 fi
 
 exec "${@}"
