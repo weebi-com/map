@@ -50,7 +50,7 @@ gem "open-uri", "~> 0.4.1"
 gem "rack-cors", "~> 2.0", ">= 2.0.2"
 
 gem "net-pop", github: "ruby/net-pop"
-gem "rails_admin_import", "~> 3.0", ">= 3.0.4"
+# gem "rails_admin_import", "~> 3.0", ">= 3.0.4"
 
 
 group :development, :test do

@@ -19,7 +19,9 @@ class ImportEntrepriseDataJob < ApplicationJob
       csv_data = CSV.parse(file_content, headers: true)
 
       csv_data.each do |row|
-        next if row["NIU"].blank? || row["niu"].blank?
+        row = row.to_h.transform_keys(&:downcase)
+
+        next if row["niu"].blank?
 
         create_or_update_entreprise(row)
       end
@@ -55,82 +57,82 @@ class ImportEntrepriseDataJob < ApplicationJob
 
   def create_or_update_entreprise(row)
     # Vérifiez si les coordonnées existent déjà dans la ligne CSV
-    latitude = row["LATITUDE"].presence || row["latitude"].presence
-    longitude = row["LONGITUDE"].presence || row["longitude"].presence
+    latitude = row["latitude"].presence
+    longitude = row["longitude"].presence
 
     # Si les coordonnées ne sont pas présentes dans le CSV, tentez de les récupérer
     unless latitude && longitude
-      location_elements = [ row["QUARTIER"] || row["quartier"], row["COMMUNE"] || row["commune"], row["VILLE"] || row["ville"], row["DEPARTEMENT"] || row["departement"], row["REGION"] || row["region"] ].compact
+      location_elements = [ row["quartier"], row["commune"], row["ville"], row["departement"], row["region"] ].compact
       location_combinations = (1..location_elements.size).flat_map { |size| location_elements.combination(size).to_a }
       coordinates = fetch_coordinates(location_combinations)
       latitude, longitude = coordinates if coordinates
     end
 
-    existing_record = Entreprise.find_by(niu: row["NIU"] || row["niu"])
+    existing_record = Entreprise.find_by(niu: row["niu"])
 
     if existing_record
       # Si les coordonnées ne sont pas présentes, mettez à jour l'enregistrement existant
       if latitude.nil? && longitude.nil?
         existing_record.update(
-          niu: row["NIU"] || row["niu"],
-          forme: row["FORME"] || row["forme"],
-          raison_sociale_rgpd: row["RAISON_SOCIALE_RGPD"] || row["raison_sociale_rgpd"],
-          sigle: row["SIGLE"] || row["sigle"],
-          activite: row["ACTIVITE"] || row["activite"],
-          region: row["REGION"] || row["region"],
-          departement: row["DEPARTEMENT"] || row["departement"],
-          ville: row["VILLE"] || row["ville"],
-          commune: row["COMMUNE"] || row["commune"],
-          quartier: row["QUARTIER"] || row["quartier"],
-          lieux_dit: row["LIEUX_DIT"] || row["lieux_dit"],
-          boite_postale: row["BOITE_POSTALE"] || row["boite_postale"],
-          npc: row["NPC"] || row["npc"],
-          npc_intitule: row["NPC_INTITULE"] || row["npc_intitule"],
-          isic_refined: row["ISIC_REFINED"] || row["isic_refined"],
-          isic_1_dig: row["ISIC_1_DIG"] || row["isic_1_dig"],
-          isic_2_dig: row["ISIC_2_DIG"] || row["isic_2_dig"],
-          isic_3_dig: row["ISIC_3_DIG"] || row["isic_3_dig"],
-          isic_4_dig: row["ISIC_4_DIG"] || row["isic_4_dig"],
-          isic_intitule: row["ISIC_INTITULE"] || row["isic_intitule"],
+          niu: row["niu"],
+          forme: row["forme"],
+          raison_sociale_rgpd: row["raison_sociale_rgpd"],
+          sigle: row["sigle"],
+          activite: row["activite"],
+          region: row["region"],
+          departement: row["departement"],
+          ville: row["ville"],
+          commune: row["commune"],
+          quartier: row["quartier"],
+          lieux_dit: row["lieux_dit"],
+          boite_postale: row["boite_postale"],
+          npc: row["npc"],
+          npc_intitule: row["npc_intitule"],
+          isic_refined: row["isic_refined"],
+          isic_1_dig: row["isic_1_dig"],
+          isic_2_dig: row["isic_2_dig"],
+          isic_3_dig: row["isic_3_dig"],
+          isic_4_dig: row["isic_4_dig"],
+          isic_intitule: row["isic_intitule"],
           latitude:,
           longitude:,
-          isic_1_dig_description: row["ISIC_1_DIG_DESCRIPTION"] || row["isic_1_dig_description"],
-          isic_2_dig_description: row["ISIC_2_DIG_DESCRIPTION"] || row["isic_2_dig_description"],
-          isic_3_dig_description: row["ISIC_3_DIG_DESCRIPTION"] || row["isic_3_dig_description"],
-          isic_4_dig_description: row["ISIC_4_DIG_DESCRIPTION"] || row["isic_4_dig_description"],
-          isic_refined_intitule: row["ISIC_REFINED_INTITULE"] || row["isic_refined_intitule"],
+          isic_1_dig_description: row["isic_1_dig_description"],
+          isic_2_dig_description: row["isic_2_dig_description"],
+          isic_3_dig_description: row["isic_3_dig_description"],
+          isic_4_dig_description: row["isic_4_dig_description"],
+          isic_refined_intitule: row["isic_refined_intitule"],
         )
       end
     else
       # Sinon, créez un nouvel enregistrement
       Entreprise.create(
-        niu: row["NIU"] || row["niu"],
-        forme: row["FORME"] || row["forme"],
-        raison_sociale_rgpd: row["RAISON_SOCIALE_RGPD"] || row["raison_sociale_rgpd"],
-        sigle: row["SIGLE"] || row["sigle"],
-        activite: row["ACTIVITE"] || row["activite"],
-        region: row["REGION"] || row["region"],
-        departement: row["DEPARTEMENT"] || row["departement"],
-        ville: row["VILLE"] || row["ville"],
-        commune: row["COMMUNE"] || row["commune"],
-        quartier: row["QUARTIER"] || row["quartier"],
-        lieux_dit: row["LIEUX_DIT"] || row["lieux_dit"],
-        boite_postale: row["BOITE_POSTALE"] || row["boite_postale"],
-        npc: row["NPC"] || row["npc"],
-        npc_intitule: row["NPC_INTITULE"] || row["npc_intitule"],
-        isic_refined: row["ISIC_REFINED"] || row["isic_refined"],
-        isic_1_dig: row["ISIC_1_DIG"] || row["isic_1_dig"],
-        isic_2_dig: row["ISIC_2_DIG"] || row["isic_2_dig"],
-        isic_3_dig: row["ISIC_3_DIG"] || row["isic_3_dig"],
-        isic_4_dig: row["ISIC_4_DIG"] || row["isic_4_dig"],
-        isic_intitule: row["ISIC_INTITULE"] || row["isic_intitule"],
+        niu: row["niu"],
+        forme: row["forme"],
+        raison_sociale_rgpd: row["raison_sociale_rgpd"],
+        sigle: row["sigle"],
+        activite: row["activite"],
+        region: row["region"],
+        departement: row["departement"],
+        ville: row["ville"],
+        commune: row["commune"],
+        quartier: row["quartier"],
+        lieux_dit: row["lieux_dit"],
+        boite_postale: row["boite_postale"],
+        npc: row["npc"],
+        npc_intitule: row["npc_intitule"],
+        isic_refined: row["isic_refined"],
+        isic_1_dig: row["isic_1_dig"],
+        isic_2_dig: row["isic_2_dig"],
+        isic_3_dig: row["isic_3_dig"],
+        isic_4_dig: row["isic_4_dig"],
+        isic_intitule: row["isic_intitule"],
         latitude:,
         longitude:,
-        isic_1_dig_description: row["ISIC_1_DIG_DESCRIPTION"] || row["isic_1_dig_description"],
-        isic_2_dig_description: row["ISIC_2_DIG_DESCRIPTION"] || row["isic_2_dig_description"],
-        isic_3_dig_description: row["ISIC_3_DIG_DESCRIPTION"] || row["isic_3_dig_description"],
-        isic_4_dig_description: row["ISIC_4_DIG_DESCRIPTION"] || row["isic_4_dig_description"],
-        isic_refined_intitule: row["ISIC_REFINED_INTITULE"] || row["isic_refined_intitule"],
+        isic_1_dig_description: row["isic_1_dig_description"],
+        isic_2_dig_description: row["isic_2_dig_description"],
+        isic_3_dig_description: row["isic_3_dig_description"],
+        isic_4_dig_description: row["isic_4_dig_description"],
+        isic_refined_intitule: row["isic_refined_intitule"],
       )
     end
   end
