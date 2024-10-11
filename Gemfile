@@ -38,7 +38,7 @@ gem "image_processing", "~> 1.2"
 
 
 gem "devise", "~> 4.9", ">= 4.9.4"
-gem "rails_admin", "~> 3.1", ">= 3.1.4"
+gem "rails_admin", "~> 3.2"
 gem "rails_db", "~> 2.4", ">= 2.4.4"
 gem "caxlsx", "~> 4.1"
 gem "caxlsx_rails", "~> 0.6.4"
