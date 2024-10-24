@@ -1,4 +1,4 @@
-![boutique_map.gif](boutique_map.gif)
+![boutique_map.gif](/boutique_map.gif)
 
 # Map Cluster
 ## Présentation
