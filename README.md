@@ -1,16 +1,6 @@
-![boutique_map.png](boutique_map.png)
-
-- TODO : create a read-only role in pg db for 
-- TODO : finish upload enterprises
-- TODO : remove file import, instead create a button with to logic 
-      - fetch_coordinates
-      - update object
-   - on whatever object 
-   - app\jobs\import_entreprise_data_job.rb
-
+![boutique_map.gif](boutique_map.gif)
 
 # Map Cluster
-
 ## Présentation
 Map permet d'importer tous types de données pour les représenter ensuite sous forme de Donut cluster
 Ce projet est pensé pour représenter des entreprises, des boutiques
