@@ -1,4 +1,13 @@
-![https://commons.m.wikimedia.org/wiki/File:Georeferenced_observation.png](icon.png)
+![boutique_map.png](boutique_map.png)
+
+- TODO : create a read-only role in pg db for 
+- TODO : finish upload enterprises
+- TODO : remove file import, instead create a button with to logic 
+      - fetch_coordinates
+      - update object
+   - on whatever object 
+   - app\jobs\import_entreprise_data_job.rb
+
 
 # Map Cluster
 
@@ -177,3 +186,7 @@ yarn global add foreman
 ```bash
 nf start -f Procfile.dev --env /dev/null
 ```
+
+***
+
+icon from : https://commons.m.wikimedia.org/wiki/File:Georeferenced_observation.png
